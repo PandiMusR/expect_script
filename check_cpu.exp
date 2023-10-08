@@ -1,0 +1,33 @@
+#!/usr/bin/expect
+
+# Usage: ./check_cpu_usage.exp <username> <hostname> <password>
+
+set username aruzel
+set hostname localhost
+set password heh231
+set port 2112
+spawn ssh $username@$hostname -p$port
+
+expect {
+    "yes/no" {
+        send "yes\r"
+        exp_continue
+    }
+    "password:" {
+        send "$password\r"
+    }
+}
+sleep 1
+expect {
+    " " {
+        send "mpstat -P ALL\r"
+    }
+}
+expect {
+    " " {
+        send "exit\r"
+    }
+}
+
+# Wait for the SSH session to close
+expect eof
