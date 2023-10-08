@@ -2,10 +2,10 @@
 
 # Usage: ./check_cpu_usage.exp <username> <hostname> <password>
 
-set username aruzel
-set hostname localhost
-set password heh231
-set port 2112
+set username <username>
+set hostname <hostname>
+set password <password>
+set port <port>
 spawn ssh $username@$hostname -p$port
 
 expect {
